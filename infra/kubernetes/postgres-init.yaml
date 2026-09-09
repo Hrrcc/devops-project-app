@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+  namespace: ticketing
+data:
+  init.sql: |
+    CREATE TABLE IF NOT EXISTS ticket_orders (
+      order_id UUID PRIMARY KEY,
+      event_id VARCHAR(100) NOT NULL,
+      customer_email VARCHAR(255) NOT NULL,
+      quantity INTEGER NOT NULL,
+      status VARCHAR(50) NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );

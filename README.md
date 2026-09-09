@@ -45,4 +45,51 @@ Prikazuje cijeli tok: lokalni razvoj kroz Compose i produkcijski deployment kroz
 - NetworkPolicy segmentacija
 - Trivy skeniranje slika u CI pipelineu
 
-Detalji skeniranja: `docs/security/image-scan-report.md`
+## Sigurnosno skeniranje
+
+Docker imageovi skenirani su pomoću Trivy alata.
+
+Rezultati skeniranja nalaze se u mapi:
+security-reports/
+
+## Pokretanje s Docker Compose
+
+```bash
+docker compose up -d --build
+```
+
+Gašenje:
+
+```bash
+docker compose down
+```
+
+## Pokretanje na Kubernetesu
+
+Primjena svih Kubernetes resursa:
+
+```bash
+kubectl apply -f infra/kubernetes/
+```
+
+Provjera:
+
+```bash
+kubectl get pods -n ticketing
+```
+
+## Rolling Update
+
+```bash
+kubectl rollout restart deployment/api -n ticketing
+```
+
+## Rollback
+
+```bash
+kubectl rollout undo deployment/api -n ticketing
+```
+
+## Autor
+
+Projekt izrađen za kolegij Uvod u DevOps – DevSecOps.
